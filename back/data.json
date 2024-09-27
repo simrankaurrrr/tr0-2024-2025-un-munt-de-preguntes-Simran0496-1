@@ -1,1 +1,226 @@
 
+{
+   "preguntes": [
+      {
+         "pregunta": "Quina marca de refrescos utilitza el lema 'Open Happiness'?",
+         "respostes": [
+            "Coca-Cola",
+            "Pepsi",
+            "7UP",
+            "Fanta"
+         ],
+         "resposta_correcta": 0,
+         "imatge": "../web/img/preg1.jpg"
+      },
+      {
+         "pregunta": "Quina marca de calçat esportiu té un logotip amb un 'swoosh'?",
+         "respostes": [
+            "Nike",
+            "Adidas",
+            "Puma",
+            "Reebok"
+         ],
+         "resposta_correcta": 0,
+         "imatge": "../web/img/preg2.jpg"
+      },
+      {
+         "pregunta": "Quina marca de xocolata és coneguda pel seu logotip de colors roig i blanc amb una 'M'?",
+         "respostes": [
+            "Mars",
+            "Milka",
+            "Cadbury",
+            "Hershey's"
+         ],
+         "resposta_correcta": 0,
+         "imatge": "../web/img/preg3.jpg"
+      },
+      {
+         "pregunta": "Quina marca de cafè utilitza el lema 'Good to the Last Drop'?",
+         "respostes": [
+            "Maxwell House",
+            "Keurig",
+            "Nespresso",
+            "Starbucks"
+         ],
+         "resposta_correcta": 0,
+         "imatge": "../web/img/preg4.jpg"
+      },
+      {
+         "pregunta": "Quina marca de productes de bellesa és coneguda pel seu lema 'Because You're Worth It'?",
+         "respostes": [
+            "L'Oréal",
+            "Tomford",
+            "Revlon",
+            "Clinique"
+         ],
+         "resposta_correcta": 0,
+         "imatge": "../web/img/preg5.jpg"
+      },
+      {
+         "pregunta": "Quina marca de vehicles utilitza el lema 'The Ultimate Driving Machine'?",
+         "respostes": [
+            "BMW",
+            "Audi",
+            "Mercedes-Benz",
+            "Volkswagen"
+         ],
+         "resposta_correcta": 0,
+         "imatge": "../web/img/preg6.jpg"
+      },
+      {
+         "pregunta": "Quina marca de refrigeradors és coneguda pel seu lema 'Life's Good'?",
+         "respostes": [
+            "LG",
+            "Samsung",
+            "Whirlpool",
+            "Bosch"
+         ],
+         "resposta_correcta": 0,
+         "imatge": "../web/img/preg7.jpg"
+      },
+      {
+         "pregunta": "Quina marca de telèfons mòbils és coneguda pel seu logotip d'una poma amb una mossegada?",
+         "respostes": [
+            "Apple",
+            "Samsung",
+            "Google",
+            "Huawei"
+         ],
+         "resposta_correcta": 0,
+         "imatge": "../web/img/preg8.jpg"
+      },
+      {
+         "pregunta": "Quina marca de xampú és coneguda  per eliminar la caspa?",
+         "respostes": [
+            "Head & Shoulders",
+            "Pantene",
+            "Dove",
+            "Garnier"
+         ],
+         "resposta_correcta": 0,
+         "imatge": "../web/img/preg9.jpg"
+      },
+      {
+         "pregunta": "Quina marca de refrescos utilitza el lema 'Taste the Feeling'?",
+         "respostes": [
+            "Coca-Cola",
+            "Pepsi",
+            "Fanta",
+            "Sprite"
+         ],
+         "resposta_correcta": 0,
+         "imatge": "../web/img/preg10.jpg"
+      },
+      {
+         "pregunta": "Quina marca de smartphones utilitza el lema 'Think Different'?",
+         "respostes": [
+            "Apple",
+            "Samsung",
+            "Nokia",
+            "Sony"
+         ],
+         "resposta_correcta": 0,
+         "imatge": "../web/img/preg11.jpg"
+      },
+      {
+         "pregunta": "Quina marca de xocolata ofereix una 'barra' de color blau i blanc?",
+         "respostes": [
+            "Cadbury",
+            "Milka",
+            "Nestlé",
+            "Hershey's"
+         ],
+         "resposta_correcta": 0,
+         "imatge": "../web/img/preg12.jpg"
+      },
+
+      {
+         "pregunta": "Quina marca de sabates de luxe és coneguda pel seu logotip amb un 'cavall'?",
+         "respostes": [
+            "Ralph Lauren",
+            "Tommy Hilfiger",
+            "Gucci",
+            "Chanel"
+         ],
+         "resposta_correcta": 0,
+         "imatge": "../web/img/preg13.jpg"
+      },
+      {
+         "pregunta": "Quina marca de llaminadures té un logotip de colors vius i dues 'M'?",
+         "respostes": [
+            "M&M's",
+            "Skittles",
+            "Haribo",
+            "Twix"
+         ],
+         "resposta_correcta": 0,
+         "imatge": "../web/img/preg14.jpg"
+      },
+      {
+         "pregunta": "Quina marca de cotxes utilitza el lema 'Vorsprung durch Technik'?",
+         "respostes": [
+            "Audi",
+            "Mercedes-Benz",
+            "BMW",
+            "Volkswagen"
+         ],
+         "resposta_correcta": 0,
+         "imatge": "../web/img/preg15.jpg"
+      },
+      {
+         "pregunta": "Quina marca de cereals utilitza el lema 'They're Gr-r-reat!'?",
+         "respostes": [
+            "Frosted Flakes",
+            "Corn Flakes",
+            "Cheerios",
+            "Rice Krispies"
+         ],
+         "resposta_correcta": 0,
+         "imatge": "../web/img/preg16.jpg"
+      },
+      {
+         "pregunta": "Quina marca de llet utilitza el lema 'Got Milk?'",
+         "respostes": [
+            "California Milk Processor Board",
+            "Nestlé",
+            "Alpro",
+            "Silk"
+         ],
+         "resposta_correcta": 0,
+         "imatge": "../web/img/preg17.jpg"
+      },
+      {
+         "pregunta": "Quina marca de begudes energètiques és coneguda pel seu logotip amb un 'tigre'?",
+         "respostes": [
+            "Red Bull",
+            "Monster",
+            "Rockstar",
+            "Amp Energy"
+         ],
+         "resposta_correcta": 0,
+         "imatge": "../web/img/preg18.jpg"
+      },
+      {
+         "pregunta": "Quina marca de cotxes utilitza el lema 'The Power of Dreams'?",
+         "respostes": [
+            "Honda",
+            "Toyota",
+            "Nissan",
+            "Mazda"
+         ],
+         "resposta_correcta": 0,
+         "imatge": "../web/img/preg19.jpg"
+      },
+      {
+         "pregunta": "Quina marca de iogurts utilitza el lema 'One Planet. One Health'?",
+         "respostes": [
+            "Danone",
+            "Yoplait",
+            "Chobani",
+            "Fage"
+         ],
+         "resposta_correcta": 0,
+         "imatge": "../web/img/preg20.jpg"
+      }
+   ]
+}
