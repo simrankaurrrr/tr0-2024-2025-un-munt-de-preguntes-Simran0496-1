@@ -1,17 +1,33 @@
 <?php
+header('Content-Type: application/json');
 
-$info = file_get_contents("./data.json");
-$datos = json_decode($info, true);
+// Número de preguntas a devolver
+$numPreguntas = isset($_GET['numPreguntas']) ? (int)$_GET['numPreguntas'] : 10;
 
-// 10 preguntas aleatorias
-$preguntes_aleatories = array_rand($datos['preguntes'], 10);
-$preguntes_seleccionades = [];
-
-foreach ($preguntes_aleatories as $index) {
-    $preguntes_seleccionades[] = $datos['preguntes'][$index];
+// Leer el archivo data.json
+$dataFile = './data.json';
+if (!file_exists($dataFile)) {
+    http_response_code(404);
+    echo json_encode(['error' => 'File not found']);
+    exit;
 }
 
-// guardar las preguntas en la sesión
-$_SESSION['preguntes'] = $preguntes_seleccionades;
+$data = json_decode(file_get_contents($dataFile), true);
 
-echo json_encode($preguntes_seleccionades);
+if ($data === null) {
+    http_response_code(500);
+    echo json_encode(['error' => 'Error reading JSON']);
+    exit;
+}
+
+// Seleccionar preguntas aleatorias
+$preguntas = $data['preguntes'];
+$selectedPreguntas = array_rand($preguntas, min($numPreguntas, count($preguntas)));
+$result = [];
+foreach ($selectedPreguntas as $index) {
+    $result[] = $preguntas[$index];
+}
+
+// Devolver las preguntas como JSON
+echo json_encode($result);
+?>
