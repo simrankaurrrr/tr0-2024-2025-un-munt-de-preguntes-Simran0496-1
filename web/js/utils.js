@@ -5,8 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     preguntes: []
   };
 
-  fetch('http://localhost/tr0-2024-2025-un-munt-de-preguntes-Simran0496/back/getPreguntas.php') // Asegúrate que esta ruta sea correcta
-    .then(response => {
+fetch('.././back/getPreguntas.php')    .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -88,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Función para enviar los resultados al servidor
   async function enviarResultados(respuestas) {
     try {
-      const response = await fetch('http://localhost/tr0-2024-2025-un-munt-de-preguntes-Simran0496/back/finalitza.php', {
+      const response = await fetch('.././back/finalitza.php', {
         method: 'POST', // Asegúrate de que sea POST
         headers: {
           'Content-Type': 'application/json' // Asegúrate de establecer el tipo de contenido
