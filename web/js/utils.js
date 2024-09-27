@@ -152,13 +152,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Función para mostrar resultados (puedes ajustarla según tus necesidades)
-  function mostrarResultados(resultats) {
-    const contenedorResultados = document.getElementById('contenedor-resultados'); // Asegúrate de que este ID exista en tu HTML
-    if (contenedorResultados) {
-      contenedorResultados.innerHTML = `Total de preguntas: ${resultats.total} <br> Respuestas correctas: ${resultats.correctas}`;
-    } else {
-      console.error('El contenedor de resultados no se encontró en el DOM.');
-    }
+// Función para mostrar resultados
+function mostrarResultados(resultats) {
+  const contenedorResultados = document.getElementById('contenedor-resultados'); // Asegúrate de que este ID exista en tu HTML
+  if (contenedorResultados) {
+    contenedorResultados.innerHTML = `
+      Total de preguntas: ${resultats.total} <br>
+      Respuestas correctas: ${resultats.correctas} <br>
+      Respuestas incorrectas: ${resultats.incorrectas}
+    `;
+  } else {
+    console.error('El contenedor de resultados no se encontró en el DOM.');
   }
+}
+
 });

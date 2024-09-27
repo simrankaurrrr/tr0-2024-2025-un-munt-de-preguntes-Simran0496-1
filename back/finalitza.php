@@ -20,7 +20,7 @@ if (!file_exists($dataFile)) {
 }
 
 $questions = json_decode(file_get_contents($dataFile), true)['preguntes'];
-$totalPreguntas = count($questions);
+$totalPreguntas = count($data);  // Contar solo las preguntas respondidas
 $respuestasCorrectas = 0;
 
 // Verificar respuestas
@@ -30,9 +30,13 @@ foreach ($data as $index => $respuesta) {
     }
 }
 
+// Calcular respuestas incorrectas
+$respuestasIncorrectas = $totalPreguntas - $respuestasCorrectas;
+
 // Devolver el resultado como JSON
 echo json_encode([
-    'total' => $totalPreguntas,
-    'correctas' => $respuestasCorrectas,
+    'total' => $totalPreguntas,         // Total de preguntas respondidas
+    'correctas' => $respuestasCorrectas, // Total de respuestas correctas
+    'incorrectas' => $respuestasIncorrectas // Total de respuestas incorrectas
 ]);
 ?>
