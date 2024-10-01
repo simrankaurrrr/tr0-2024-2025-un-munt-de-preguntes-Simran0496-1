@@ -1,4 +1,3 @@
-
 {
    "preguntes": [
       {
@@ -9,7 +8,7 @@
             "7UP",
             "Fanta"
          ],
-         "resposta_correcta": 0,
+         "resposta_correcta": "Coca-Cola",
          "imatge": "../web/img/preg1.jpg"
       },
       {
@@ -20,7 +19,7 @@
             "Puma",
             "Reebok"
          ],
-         "resposta_correcta": 0,
+         "resposta_correcta": "Nike",
          "imatge": "../web/img/preg2.jpg"
       },
       {
@@ -31,7 +30,7 @@
             "Cadbury",
             "Hershey's"
          ],
-         "resposta_correcta": 0,
+         "resposta_correcta": "Mars",
          "imatge": "../web/img/preg3.jpg"
       },
       {
@@ -42,7 +41,7 @@
             "Nespresso",
             "Starbucks"
          ],
-         "resposta_correcta": 0,
+         "resposta_correcta": "Maxwell House",
          "imatge": "../web/img/preg4.jpg"
       },
       {
@@ -53,7 +52,7 @@
             "Revlon",
             "Clinique"
          ],
-         "resposta_correcta": 0,
+         "resposta_correcta": "L'Oréal",
          "imatge": "../web/img/preg5.jpg"
       },
       {
@@ -64,7 +63,7 @@
             "Mercedes-Benz",
             "Volkswagen"
          ],
-         "resposta_correcta": 0,
+         "resposta_correcta": "BMW",
          "imatge": "../web/img/preg6.jpg"
       },
       {
@@ -75,7 +74,7 @@
             "Whirlpool",
             "Bosch"
          ],
-         "resposta_correcta": 0,
+         "resposta_correcta": "LG",
          "imatge": "../web/img/preg7.jpg"
       },
       {
@@ -86,7 +85,7 @@
             "Google",
             "Huawei"
          ],
-         "resposta_correcta": 0,
+         "resposta_correcta": "Apple",
          "imatge": "../web/img/preg8.jpg"
       },
       {
@@ -97,7 +96,7 @@
             "Dove",
             "Garnier"
          ],
-         "resposta_correcta": 0,
+         "resposta_correcta": "Head & Shoulders",
          "imatge": "../web/img/preg9.jpg"
       },
       {
@@ -108,7 +107,7 @@
             "Fanta",
             "Sprite"
          ],
-         "resposta_correcta": 0,
+         "resposta_correcta": "Coca-Cola",
          "imatge": "../web/img/preg10.jpg"
       },
       {
@@ -119,7 +118,7 @@
             "Nokia",
             "Sony"
          ],
-         "resposta_correcta": 0,
+         "resposta_correcta": "Apple",
          "imatge": "../web/img/preg11.jpg"
       },
       {
@@ -130,10 +129,9 @@
             "Nestlé",
             "Hershey's"
          ],
-         "resposta_correcta": 0,
+         "resposta_correcta": "Cadbury",
          "imatge": "../web/img/preg12.jpg"
       },
-
       {
          "pregunta": "Quina marca de sabates de luxe és coneguda pel seu logotip amb un 'cavall'?",
          "respostes": [
@@ -142,7 +140,7 @@
             "Gucci",
             "Chanel"
          ],
-         "resposta_correcta": 0,
+         "resposta_correcta": "Ralph Lauren",
          "imatge": "../web/img/preg13.jpg"
       },
       {
@@ -153,7 +151,7 @@
             "Haribo",
             "Twix"
          ],
-         "resposta_correcta": 0,
+         "resposta_correcta": "M&M's",
          "imatge": "../web/img/preg14.jpg"
       },
       {
@@ -164,7 +162,7 @@
             "BMW",
             "Volkswagen"
          ],
-         "resposta_correcta": 0,
+         "resposta_correcta": "Audi",
          "imatge": "../web/img/preg15.jpg"
       },
       {
@@ -175,7 +173,7 @@
             "Cheerios",
             "Rice Krispies"
          ],
-         "resposta_correcta": 0,
+         "resposta_correcta": "Frosted Flakes",
          "imatge": "../web/img/preg16.jpg"
       },
       {
@@ -186,7 +184,7 @@
             "Alpro",
             "Silk"
          ],
-         "resposta_correcta": 0,
+         "resposta_correcta": "California Milk Processor Board",
          "imatge": "../web/img/preg17.jpg"
       },
       {
@@ -197,7 +195,7 @@
             "Rockstar",
             "Amp Energy"
          ],
-         "resposta_correcta": 0,
+         "resposta_correcta": "Red Bull",
          "imatge": "../web/img/preg18.jpg"
       },
       {
@@ -208,7 +206,7 @@
             "Nissan",
             "Mazda"
          ],
-         "resposta_correcta": 0,
+         "resposta_correcta": "Honda",
          "imatge": "../web/img/preg19.jpg"
       },
       {
@@ -219,7 +217,7 @@
             "Chobani",
             "Fage"
          ],
-         "resposta_correcta": 0,
+         "resposta_correcta": "Danone",
          "imatge": "../web/img/preg20.jpg"
       }
    ]

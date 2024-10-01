@@ -1,33 +1,61 @@
 <?php
-header('Content-Type: application/json');
+error_reporting(E_ALL); // Reportar todos los errores
+ini_set('display_errors', 1); // Mostrar errores en la salida
+header('Content-Type: application/json'); // Configurar la cabecera para devolver JSON
 
-// Número de preguntas a devolver
-$numPreguntas = isset($_GET['numPreguntas']) ? (int)$_GET['numPreguntas'] : 10;
+// Conexión a la base de datos
+$conn = new mysqli("localhost", "root", "", "db");
 
-// Leer el archivo data.json
-$dataFile = './data.json';
-if (!file_exists($dataFile)) {
-    http_response_code(404);
-    echo json_encode(['error' => 'File not found']);
+// Verificar la conexión
+if ($conn->connect_error) {
+    echo json_encode(["error" => "Connection failed: " . $conn->connect_error]);
     exit;
 }
 
-$data = json_decode(file_get_contents($dataFile), true);
+// Consulta para obtener las preguntas y respuestas
+$sql = "
+    SELECT p.id_pregunta, p.pregunta, p.imatge, 
+           GROUP_CONCAT(r.resposta SEPARATOR '|') AS respostes, 
+           GROUP_CONCAT(r.es_correcta SEPARATOR '|') AS correctas
+    FROM preguntes p
+    LEFT JOIN respostes r ON p.id_pregunta = r.pregunta_id
+    GROUP BY p.id_pregunta
+    ORDER BY p.id_pregunta
+";
 
-if ($data === null) {
-    http_response_code(500);
-    echo json_encode(['error' => 'Error reading JSON']);
-    exit;
+// Ejecutar la consulta
+$result = $conn->query($sql);
+
+$preguntes = [];
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        // Agregar pregunta
+        $preguntes[] = [
+            'pregunta' => $row['pregunta'],
+            'imatge' => $row['imatge'],
+            'respostes' => explode('|', $row['respostes']), // Convertir cadena a array
+            'correcta' => null // Se inicializa el campo para la respuesta correcta
+        ];
+
+        // Si hay respuestas correctas, asignarlas
+        if ($row['correctas']) {
+            $correctas = explode('|', $row['correctas']);
+            foreach ($correctas as $respuesta) {
+                // Asignar la respuesta correcta
+                if (in_array($respuesta, $preguntes[count($preguntes) - 1]['respostes'])) {
+                    $preguntes[count($preguntes) - 1]['correcta'] = $respuesta;
+                }
+            }
+        }
+    }
 }
 
-// Seleccionar preguntas aleatorias
-$preguntas = $data['preguntes'];
-$selectedPreguntas = array_rand($preguntas, min($numPreguntas, count($preguntas)));
-$result = [];
-foreach ($selectedPreguntas as $index) {
-    $result[] = $preguntas[$index];
-}
+// Limitar a las primeras 10 preguntas de la lista final
+$preguntes_limited = array_slice($preguntes, 0, 10);
 
-// Devolver las preguntas como JSON
-echo json_encode($result);
+// Devolver el JSON con las preguntas
+echo json_encode(["preguntes" => $preguntes_limited]);
+
+$conn->close();
 ?>

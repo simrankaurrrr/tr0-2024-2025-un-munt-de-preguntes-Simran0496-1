@@ -1,42 +1,43 @@
 <?php
 header('Content-Type: application/json');
 
-// Recibir las respuestas como JSON
-$data = json_decode(file_get_contents('php://input'), true);
+// Cargar configuración
+require_once 'config.php';
 
-// Verificar si se recibieron las respuestas
-if (!is_array($data)) {
-    http_response_code(400);
-    echo json_encode(['error' => 'Invalid input']);
-    exit;
-}
+// Conectar a la base de datos
+$conn = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
+$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-// Leer el archivo data.json para verificar respuestas
-$dataFile = './data.json';
-if (!file_exists($dataFile)) {
-    http_response_code(404);
-    echo json_encode(['error' => 'File not found']);
-    exit;
-}
+// Recuperar las respuestas enviadas
+$input = json_decode(file_get_contents("php://input"), true);
 
-$questions = json_decode(file_get_contents($dataFile), true)['preguntes'];
-$totalPreguntas = count($data);  // Contar solo las preguntas respondidas
-$respuestasCorrectas = 0;
+// Inicializar contadores
+$correctas = 0;
+$incorrectas = 0;
 
-// Verificar respuestas
-foreach ($data as $index => $respuesta) {
-    if (isset($questions[$index]) && $questions[$index]['resposta_correcta'] === $respuesta) {
-        $respuestasCorrectas++;
+// Comprobar las respuestas
+foreach ($input['respostes'] as $respuesta) {
+    $preguntaId = $respuesta['idPregunta'];
+    $respuestaSeleccionada = $respuesta['respostaSeleccionada'];
+
+    // Realizar la consulta para obtener la respuesta correcta de la base de datos
+    $sql = "SELECT resposta_correcta FROM preguntes WHERE id_pregunta = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute([$preguntaId]);
+    $respostaCorrecta = $stmt->fetchColumn(); // Obtener solo la respuesta correcta
+
+    // Verificar si la respuesta seleccionada es correcta
+    if ($respostaCorrecta == $respuestaSeleccionada) {
+        $correctas++;
+    } else {
+        $incorrectas++;
     }
 }
 
-// Calcular respuestas incorrectas
-$respuestasIncorrectas = $totalPreguntas - $respuestasCorrectas;
-
-// Devolver el resultado como JSON
-echo json_encode([
-    'total' => $totalPreguntas,         // Total de preguntas respondidas
-    'correctas' => $respuestasCorrectas, // Total de respuestas correctas
-    'incorrectas' => $respuestasIncorrectas // Total de respuestas incorrectas
-]);
+// Enviar la puntuación al cliente
+$response = [
+    'puntuacio' => $correctas,
+    'totalPreguntes' => $correctas + $incorrectas
+];
+echo json_encode($response);
 ?>
