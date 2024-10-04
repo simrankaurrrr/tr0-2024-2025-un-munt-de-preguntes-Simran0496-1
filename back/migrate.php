@@ -28,7 +28,7 @@ if ($arrayDatosJSON === null) {
 }
 
 // Preparar la consulta de inserción para las preguntas
-$consultaInsertarPregunta = "INSERT INTO preguntes (pregunta, resposta_correcta, imatge) VALUES (:textoPregunta, :indiceRespuestaCorrecta, :imagen)";
+$consultaInsertarPregunta = "INSERT INTO preguntes (pregunta, resposta_correcta_id, imatge) VALUES (:textoPregunta, :indiceRespostaCorrecta, :imagen)";
 $sentenciaInsertarPregunta = $conexionBD->prepare($consultaInsertarPregunta);
 
 // Preparar la consulta de inserción para las respuestas
@@ -37,29 +37,38 @@ $sentenciaInsertarRespuesta = $conexionBD->prepare($consultaInsertarRespuesta);
 
 // Recorrer los datos y realizar las inserciones
 foreach ($arrayDatosJSON['preguntes'] as $preguntaItem) {
-    // Insertar la pregunta
+    // Primero, inserta la pregunta
     $sentenciaInsertarPregunta->execute([
         ':textoPregunta' => $preguntaItem['pregunta'],
-        ':indiceRespuestaCorrecta' => $preguntaItem['resposta_correcta'],
+        ':indiceRespostaCorrecta' => null, // Se actualizará después
         ':imagen' => $preguntaItem['imatge']
     ]);
 
     // Obtener el ID de la pregunta insertada
     $idPreguntaInsertada = $conexionBD->lastInsertId();
-    
     echo "Pregunta insertada: ID $idPreguntaInsertada - " . $preguntaItem['pregunta'] . "\n"; // Debug: mostrar la pregunta insertada
 
-    // Insertar las respuestas
+    // Guardar los IDs de las respuestas
+    $idRespuestas = [];
+    
+    // Insertar respuestas
     foreach ($preguntaItem['respostes'] as $respuestaTexto) {
-        try {
-            $sentenciaInsertarRespuesta->execute([
-                ':idPregunta' => $idPreguntaInsertada,
-                ':textoRespuesta' => $respuestaTexto
-            ]);
-            echo "Respuesta insertada: $respuestaTexto para pregunta ID $idPreguntaInsertada\n"; // Debug: mostrar la respuesta insertada
-        } catch (PDOException $errorInsercionRespuesta) {
-            echo "Error al insertar respuesta: " . $errorInsercionRespuesta->getMessage() . "\n"; // Manejo de errores
-        }
+        $sentenciaInsertarRespuesta->execute([
+            ':idPregunta' => $idPreguntaInsertada, // Relacionar respuesta con esta pregunta
+            ':textoRespuesta' => $respuestaTexto
+        ]);
+        $idRespuestas[] = $conexionBD->lastInsertId(); // Guardar el ID de la respuesta insertada
+    }
+
+    // Encontrar el ID de la respuesta correcta
+    $respuestaCorrectaTexto = $preguntaItem['resposta_correcta_id'];
+    $indiceRespuestaCorrecta = array_search($respuestaCorrectaTexto, $preguntaItem['respostes']);
+
+    if ($indiceRespuestaCorrecta !== false) {
+        // Actualizar la respuesta correcta en la pregunta insertada
+        $conexionBD->query("UPDATE preguntes SET resposta_correcta_id = " . $idRespuestas[$indiceRespuestaCorrecta] . " WHERE id = $idPreguntaInsertada");
+    } else {
+        echo "No se encontró una respuesta correcta válida para la pregunta: " . $preguntaItem['pregunta'] . "\n";
     }
 }
 

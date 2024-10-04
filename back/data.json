@@ -8,7 +8,7 @@
             "7UP",
             "Fanta"
          ],
-         "resposta_correcta": "Coca-Cola",
+         "resposta_correcta_id": "Coca-Cola",
          "imatge": "../web/img/preg1.jpg"
       },
       {
@@ -19,7 +19,7 @@
             "Puma",
             "Reebok"
          ],
-         "resposta_correcta": "Nike",
+         "resposta_correcta_id": "Nike",
          "imatge": "../web/img/preg2.jpg"
       },
       {
@@ -30,7 +30,7 @@
             "Cadbury",
             "Hershey's"
          ],
-         "resposta_correcta": "Mars",
+         "resposta_correcta_id": "Mars",
          "imatge": "../web/img/preg3.jpg"
       },
       {
@@ -41,7 +41,7 @@
             "Nespresso",
             "Starbucks"
          ],
-         "resposta_correcta": "Maxwell House",
+         "resposta_correcta_id": "Maxwell House",
          "imatge": "../web/img/preg4.jpg"
       },
       {
@@ -52,7 +52,7 @@
             "Revlon",
             "Clinique"
          ],
-         "resposta_correcta": "L'Oréal",
+         "resposta_correcta_id": "L'Oréal",
          "imatge": "../web/img/preg5.jpg"
       },
       {
@@ -63,7 +63,7 @@
             "Mercedes-Benz",
             "Volkswagen"
          ],
-         "resposta_correcta": "BMW",
+         "resposta_correcta_id": "BMW",
          "imatge": "../web/img/preg6.jpg"
       },
       {
@@ -74,7 +74,7 @@
             "Whirlpool",
             "Bosch"
          ],
-         "resposta_correcta": "LG",
+         "resposta_correcta_id": "LG",
          "imatge": "../web/img/preg7.jpg"
       },
       {
@@ -85,7 +85,7 @@
             "Google",
             "Huawei"
          ],
-         "resposta_correcta": "Apple",
+         "resposta_correcta_id": "Apple",
          "imatge": "../web/img/preg8.jpg"
       },
       {
@@ -96,7 +96,7 @@
             "Dove",
             "Garnier"
          ],
-         "resposta_correcta": "Head & Shoulders",
+         "resposta_correcta_id": "Head & Shoulders",
          "imatge": "../web/img/preg9.jpg"
       },
       {
@@ -107,7 +107,7 @@
             "Fanta",
             "Sprite"
          ],
-         "resposta_correcta": "Coca-Cola",
+         "resposta_correcta_id": "Coca-Cola",
          "imatge": "../web/img/preg10.jpg"
       },
       {
@@ -118,7 +118,7 @@
             "Nokia",
             "Sony"
          ],
-         "resposta_correcta": "Apple",
+         "resposta_correcta_id": "Apple",
          "imatge": "../web/img/preg11.jpg"
       },
       {
@@ -129,7 +129,7 @@
             "Nestlé",
             "Hershey's"
          ],
-         "resposta_correcta": "Cadbury",
+         "resposta_correcta_id": "Cadbury",
          "imatge": "../web/img/preg12.jpg"
       },
       {
@@ -140,7 +140,7 @@
             "Gucci",
             "Chanel"
          ],
-         "resposta_correcta": "Ralph Lauren",
+         "resposta_correcta_id": "Ralph Lauren",
          "imatge": "../web/img/preg13.jpg"
       },
       {
@@ -151,7 +151,7 @@
             "Haribo",
             "Twix"
          ],
-         "resposta_correcta": "M&M's",
+         "resposta_correcta_id": "M&M's",
          "imatge": "../web/img/preg14.jpg"
       },
       {
@@ -162,7 +162,7 @@
             "BMW",
             "Volkswagen"
          ],
-         "resposta_correcta": "Audi",
+         "resposta_correcta_id": "Audi",
          "imatge": "../web/img/preg15.jpg"
       },
       {
@@ -173,7 +173,7 @@
             "Cheerios",
             "Rice Krispies"
          ],
-         "resposta_correcta": "Frosted Flakes",
+         "resposta_correcta_id": "Frosted Flakes",
          "imatge": "../web/img/preg16.jpg"
       },
       {
@@ -184,7 +184,7 @@
             "Alpro",
             "Silk"
          ],
-         "resposta_correcta": "California Milk Processor Board",
+         "resposta_correcta_id": "California Milk Processor Board",
          "imatge": "../web/img/preg17.jpg"
       },
       {
@@ -195,7 +195,7 @@
             "Rockstar",
             "Amp Energy"
          ],
-         "resposta_correcta": "Red Bull",
+         "resposta_correcta_id": "Red Bull",
          "imatge": "../web/img/preg18.jpg"
       },
       {
@@ -206,7 +206,7 @@
             "Nissan",
             "Mazda"
          ],
-         "resposta_correcta": "Honda",
+         "resposta_correcta_id": "Honda",
          "imatge": "../web/img/preg19.jpg"
       },
       {
@@ -217,7 +217,7 @@
             "Chobani",
             "Fage"
          ],
-         "resposta_correcta": "Danone",
+         "resposta_correcta_id": "Danone",
          "imatge": "../web/img/preg20.jpg"
       }
    ]

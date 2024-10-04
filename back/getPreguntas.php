@@ -1,61 +1,57 @@
 <?php
-error_reporting(E_ALL); // Reportar todos los errores
-ini_set('display_errors', 1); // Mostrar errores en la salida
-header('Content-Type: application/json'); // Configurar la cabecera para devolver JSON
+session_start(); // Iniciar la sesión
 
-// Conexión a la base de datos
-$conn = new mysqli("localhost", "root", "", "db");
+// Configuración de la conexión
+require_once 'config.php';
 
-// Verificar la conexión
-if ($conn->connect_error) {
-    echo json_encode(["error" => "Connection failed: " . $conn->connect_error]);
-    exit;
-}
-
-// Consulta para obtener las preguntas y respuestas
-$sql = "
-    SELECT p.id_pregunta, p.pregunta, p.imatge, 
-           GROUP_CONCAT(r.resposta SEPARATOR '|') AS respostes, 
-           GROUP_CONCAT(r.es_correcta SEPARATOR '|') AS correctas
-    FROM preguntes p
-    LEFT JOIN respostes r ON p.id_pregunta = r.pregunta_id
-    GROUP BY p.id_pregunta
-    ORDER BY p.id_pregunta
-";
-
-// Ejecutar la consulta
-$result = $conn->query($sql);
-
-$preguntes = [];
-
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        // Agregar pregunta
-        $preguntes[] = [
-            'pregunta' => $row['pregunta'],
-            'imatge' => $row['imatge'],
-            'respostes' => explode('|', $row['respostes']), // Convertir cadena a array
-            'correcta' => null // Se inicializa el campo para la respuesta correcta
-        ];
-
-        // Si hay respuestas correctas, asignarlas
-        if ($row['correctas']) {
-            $correctas = explode('|', $row['correctas']);
-            foreach ($correctas as $respuesta) {
-                // Asignar la respuesta correcta
-                if (in_array($respuesta, $preguntes[count($preguntes) - 1]['respostes'])) {
-                    $preguntes[count($preguntes) - 1]['correcta'] = $respuesta;
-                }
-            }
-        }
+try {
+    // Conectar a la base de datos
+    $conexionBD = new mysqli($host, $user, $pass, $dbname);
+    
+    // Comprobar la conexión
+    if ($conexionBD->connect_error) {
+        die("Error de conexión: " . $conexionBD->connect_error);
     }
+
+    // Consulta para obtener todas las preguntas y sus respuestas
+    $consultaPreguntas = "SELECT * FROM preguntes";
+    $resultadoPreguntas = $conexionBD->query($consultaPreguntas);
+
+    if ($resultadoPreguntas->num_rows > 0) {
+        // Obtener todas las preguntas en un array
+        $totesPreguntes = [];
+        while ($row = $resultadoPreguntas->fetch_assoc()) {
+            $idPregunta = $row['id'];
+            
+            // Obtener las respuestas para cada pregunta
+            $consultaRespostes = "SELECT * FROM respostes WHERE pregunta_id = ?";
+            $stmt = $conexionBD->prepare($consultaRespostes);
+            $stmt->bind_param("i", $idPregunta);
+            $stmt->execute();
+            $resultadoRespostes = $stmt->get_result();
+
+            $respostes = [];
+            while ($resposta = $resultadoRespostes->fetch_assoc()) {
+                $respostes[] = $resposta['resposta'];
+            }
+
+            // Agregar la pregunta con sus respuestas al array final
+            $row['respostes'] = $respostes;
+            $totesPreguntes[] = $row;
+        }
+
+        // Guardar las preguntas en la sesión
+        $_SESSION['preguntesSeleccionades'] = $totesPreguntes;
+
+        // Devolver todas las preguntas como JSON
+        header('Content-Type: application/json');
+        echo json_encode($totesPreguntes);
+    } else {
+        echo json_encode([]);
+    }
+} catch (mysqli_sql_exception $e) {
+    echo "Error: " . $e->getMessage();
+} finally {
+    $conexionBD->close();
 }
-
-// Limitar a las primeras 10 preguntas de la lista final
-$preguntes_limited = array_slice($preguntes, 0, 10);
-
-// Devolver el JSON con las preguntas
-echo json_encode(["preguntes" => $preguntes_limited]);
-
-$conn->close();
 ?>

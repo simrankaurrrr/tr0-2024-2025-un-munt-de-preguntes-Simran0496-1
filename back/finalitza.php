@@ -1,43 +1,56 @@
 <?php
+
 header('Content-Type: application/json');
 
 // Cargar configuración
 require_once 'config.php';
 
-// Conectar a la base de datos
-$conn = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
-$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+try {
+    $conn = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    echo json_encode(['error' => 'Error de conexión a la base de datos: ' . $e->getMessage()]);
+    exit();
+}
 
-// Recuperar las respuestas enviadas
-$input = json_decode(file_get_contents("php://input"), true);
-
-// Inicializar contadores
+$input = file_get_contents("php://input");
+$data = json_decode($input, true);
 $correctas = 0;
-$incorrectas = 0;
+$totalPreguntes = count($data['respostes']); // Cambiar aquí para contar todas las preguntas enviadas
+$respuestasContadas = 0; // Contador de respuestas válidas
 
-// Comprobar las respuestas
-foreach ($input['respostes'] as $respuesta) {
-    $preguntaId = $respuesta['idPregunta'];
-    $respuestaSeleccionada = $respuesta['respostaSeleccionada'];
+foreach ($data['respostes'] as $respuesta) {
+    if (isset($respuesta['idPregunta'], $respuesta['respostaSeleccionada']) && $respuesta['respostaSeleccionada'] != -1) {
+        // Solo incrementamos si se ha respondido
+        $respuestasContadas++;
 
-    // Realizar la consulta para obtener la respuesta correcta de la base de datos
-    $sql = "SELECT resposta_correcta FROM preguntes WHERE id_pregunta = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute([$preguntaId]);
-    $respostaCorrecta = $stmt->fetchColumn(); // Obtener solo la respuesta correcta
+        $preguntaId = $respuesta['idPregunta'];
+        $respuestaSeleccionada = trim($respuesta['respostaSeleccionada']);
 
-    // Verificar si la respuesta seleccionada es correcta
-    if ($respostaCorrecta == $respuestaSeleccionada) {
-        $correctas++;
-    } else {
-        $incorrectas++;
+        // Obtener la respuesta correcta
+        $sql = "SELECT resposta_correcta_id FROM preguntes WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$preguntaId]);
+        $respostaCorrectaId = $stmt->fetchColumn();
+
+        // Compara la respuesta seleccionada con la correcta
+        if ($respostaCorrectaId) {
+            // Obtener el ID de la respuesta seleccionada
+            $sqlRespuestaId = "SELECT id FROM respostes WHERE resposta = ? AND pregunta_id = ?";
+            $stmtRespuesta = $conn->prepare($sqlRespuestaId);
+            $stmtRespuesta->execute([$respuestaSeleccionada, $preguntaId]);
+            $respuestaSeleccionadaId = $stmtRespuesta->fetchColumn();
+
+            if ($respuestaSeleccionadaId == $respostaCorrectaId) {
+                $correctas++; // Incrementa el contador de respuestas correctas
+            }
+        }
     }
 }
 
-// Enviar la puntuación al cliente
-$response = [
+// Aquí puedes retornar los resultados
+echo json_encode([
     'puntuacio' => $correctas,
-    'totalPreguntes' => $correctas + $incorrectas
-];
-echo json_encode($response);
+    'totalPreguntes' => $totalPreguntes // Regresa el total de preguntas seleccionadas
+]);
 ?>
