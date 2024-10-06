@@ -5,11 +5,46 @@ $archivoConfig = 'config.php';
 require_once $archivoConfig;
 
 try {
-    // Conexión a la base de datos
-    $conexionBD = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
+    // Conexión a MySQL sin especificar la base de datos para crearla si no existe
+    $conexionBD = new PDO("mysql:host=$host", $user, $pass);
     $conexionBD->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Crear la base de datos si no existe
+    $conexionBD->exec("CREATE DATABASE IF NOT EXISTS $dbname CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci");
+    
+    // Seleccionar la base de datos recién creada
+    $conexionBD->exec("USE $dbname");
+    
 } catch (PDOException $errorConexion) {
     die("Error de conexión: " . $errorConexion->getMessage());
+}
+
+// Crear las tablas si no existen
+try {
+    // Crear la tabla de preguntas
+    $crearTablaPreguntes = "
+        CREATE TABLE IF NOT EXISTS preguntes (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            pregunta TEXT NOT NULL,
+            resposta_correcta_id INT DEFAULT NULL,
+            imatge VARCHAR(255) DEFAULT NULL
+        ) ENGINE=InnoDB;
+    ";
+    $conexionBD->exec($crearTablaPreguntes);
+
+    // Crear la tabla de respuestas
+    $crearTablaRespostes = "
+        CREATE TABLE IF NOT EXISTS respostes (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            pregunta_id INT NOT NULL,
+            resposta TEXT NOT NULL,
+            FOREIGN KEY (pregunta_id) REFERENCES preguntes(id) ON DELETE CASCADE
+        ) ENGINE=InnoDB;
+    ";
+    $conexionBD->exec($crearTablaRespostes);
+
+} catch (PDOException $errorTabla) {
+    die("Error al crear las tablas: " . $errorTabla->getMessage());
 }
 
 // Ruta del archivo JSON
