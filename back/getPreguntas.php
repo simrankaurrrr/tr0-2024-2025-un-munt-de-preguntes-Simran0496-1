@@ -6,7 +6,7 @@ require_once 'config.php';
 
 try {
     // Conectar a la base de datos
-    $conexionBD = new mysqli($host, $user, $pass, $dbname);
+    $conexionBD = new mysqli($host, $user, $pass, $db);
     
     // Comprobar la conexión
     if ($conexionBD->connect_error) {

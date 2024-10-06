@@ -1,7 +1,7 @@
 let preg = [];
 let preguntaActual = 0;
 let timer;
-const tiempoLimite = 30;
+const tiempoLimite = 3;
 let tiempoRestante = tiempoLimite;
 let cantidadPreguntes = 0;
 
