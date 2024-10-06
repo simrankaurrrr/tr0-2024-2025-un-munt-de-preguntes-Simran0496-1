@@ -1,0 +1,124 @@
+:root {
+    --color1: #FFAF87; /* Color de fondo general */
+    --color2: #FF8E72; /* Color de fondo del encabezado y botones */
+    --color3: #ED6A5E; /* Color de los títulos */
+    --color-text: #333; /* Color del texto */
+    --color-button-hover: #ED6A5E; /* Color de hover para botones */
+    --button-border-radius: 8px; /* Radio de borde de los botones */
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    background-color: var(--color1);
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    color: var(--color-text);
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: auto;
+    background: white; /* Fondo blanco para el contenedor principal */
+    padding: 20px;
+    border-radius: 12px; /* Esquinas redondeadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Sombra */
+  }
+  
+  h1 {
+    background-color: var(--color2);
+    margin: 0;
+    padding: 20px;
+    font-size: 2.5em;
+    color: white;
+    border-radius: var(--button-border-radius); /* Usar variable para redondear */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  #formularioPregunta {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: white; /* Fondo blanco para el formulario */
+    border-radius: 12px; /* Esquinas redondeadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Sombra */
+  }
+  
+  .label {
+    margin-top: 10px;
+    display: block;
+    font-size: 1em;
+    color: var(--color3); /* Color de los títulos */
+  }
+  
+  input {
+    margin: 10px 0;
+    padding: 10px;
+    width: 100%; /* 100% para adaptarse al contenedor */
+    border-radius: var(--button-border-radius); /* Usar variable para redondear */
+    border: 1px solid #ccc; /* Bordes grises */
+  }
+  
+  .button {
+    background-color: var(--color2);
+    border: none;
+    color: white;
+    padding: 12px 20px;
+    margin: 10px 5px; /* Espaciado entre botones */
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: var(--button-border-radius); /* Usar variable para redondear */
+    transition: background-color 0.5s, transform 0.3s;
+    width: 120px; /* Ancho fijo para todos los botones */
+  }
+  
+  .button:hover {
+    background-color: var(--color-button-hover);
+  }
+  
+  .button:active {
+    transform: scale(0.98);
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd; /* Línea de separación entre filas */
+  }
+  
+  th {
+    background-color: var(--color2); /* Color de encabezado de la tabla */
+    color: white; /* Texto blanco en el encabezado */
+  }
+  
+  .notification {
+    background-color: #28a745; /* Color verde */
+    color: white;
+    padding: 10px;
+    margin: 20px 0;
+    border-radius: var(--button-border-radius); /* Usar variable para redondear */
+    text-align: center;
+    position: relative;
+    transition: opacity 0.3s ease;
+  }
+  
+  .notification.hidden {
+    display: none; /* Ocultar el mensaje */
+  }
+  
+  @media (min-width: 768px) {
+    .button {
+      padding: 15px 25px;
+      font-size: 1.1em;
+    }
+  }
+  

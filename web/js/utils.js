@@ -1,7 +1,7 @@
 let preg = [];
 let preguntaActual = 0;
 let timer;
-const tiempoLimite = 3;
+const tiempoLimite = 30;
 let tiempoRestante = tiempoLimite;
 let cantidadPreguntes = 0;
 
@@ -13,7 +13,7 @@ let estatDeLaPartida = {
 function iniciarJuego(nombre, cantPreg) {
     console.log(`Iniciando juego para: ${nombre} con ${cantPreg} preguntas`);
 
-    cantidadPreguntes = cantPreg; //uso global
+    cantidadPreguntes = cantPreg; // uso global
 
     // nombre
     localStorage.setItem("nombreUsuario", nombre);
@@ -55,8 +55,7 @@ function iniciarJuego(nombre, cantPreg) {
         });
 }
 
-
-//iniciar el tiempo
+// iniciar el tiempo
 function iniciarTemporizador() {
     document.getElementById('temporizador').innerText = `Tiempo restante: ${tiempoRestante} segundos`;
     timer = setInterval(() => {
@@ -70,6 +69,7 @@ function iniciarTemporizador() {
         }
     }, 1000);
 }
+
 function mostrarPregunta() {
     let htmlString = '';
 
@@ -147,7 +147,6 @@ function navegarPregunta(direccion) {
     mostrarPregunta();
 }
 
-
 function verificarResposta(preguntaIndex, respuestaIndex) {
     const pregunta = estatDeLaPartida.preguntes[preguntaIndex];
 
@@ -179,13 +178,13 @@ function navegarPregunta(direccion) {
 
     mostrarPregunta();
 }
+
 function calcularPuntuacion() {
     let puntuacion = 0;
 
     estatDeLaPartida.preguntes.forEach(p => {
         // Si no hay respuesta seleccionada, se considera 0 puntos.
         if (p.respostaSeleccionada === null) {
-            // Puedes decidir si quieres sumar 0 explícitamente o simplemente no incrementar la puntuación.
             return; // No incrementamos puntuación si no hay respuesta
         }
         if (p.respostaSeleccionada === p.respostaCorrecta) {
@@ -196,12 +195,10 @@ function calcularPuntuacion() {
     return puntuacion;
 }
 
-
 // boton enviar resultados
 document.getElementById('enviarResultats').addEventListener('click', () => {
     enviarResultatsFuncion();
 });
-
 
 function enviarResultatsFuncion() {
     clearInterval(timer);
@@ -246,7 +243,6 @@ function enviarResultatsFuncion() {
         console.error('Error al enviar los resultados:', error);
     });
 }
-
 
 function mostrarEstatPartida() {
     let estatPartida = document.getElementById('estatPartida');
@@ -309,8 +305,13 @@ document.getElementById('iniciarJuego').addEventListener('click', () => {
     const nombre = document.getElementById('nombre').value.trim();
     const cantidadPreguntes = parseInt(document.getElementById('cantidadPreguntas').value.trim());
 
+    // Validación de la cantidad de preguntas
     if (nombre && cantidadPreguntes > 0) {
-        iniciarJuego(nombre, cantidadPreguntes);
+        if (cantidadPreguntes > 20) {
+            alert('Error: La cantidad máxima de preguntas es 20.'); // Mensaje de error si se supera el límite
+        } else {
+            iniciarJuego(nombre, cantidadPreguntes); // Inicia el juego si la cantidad es válida
+        }
     } else {
         alert('Por favor, ingresa tu nombre y una cantidad válida de preguntas.'); // Alertar si no se ingresa un nombre o cantidad
     }

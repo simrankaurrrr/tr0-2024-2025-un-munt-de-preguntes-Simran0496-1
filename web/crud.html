@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Preguntas</title>
+    <link rel="stylesheet" href="css/crudStyle.css"> <!-- Asegúrate de tener tu CSS -->
+</head>
+<body>
+    <div class="container">
+        <h1>Gestión de Preguntas</h1>
+
+        <button class="button add-btn" onclick="mostrarFormularioAgregar()">Agregar Nueva Pregunta</button>
+
+        <!-- Formulario para agregar o editar preguntas -->
+        <div id="formularioPregunta" class="form-container hidden">
+            <h2 id="tituloFormulario">Agregar Pregunta</h2>
+            <form id="formPregunta" onsubmit="guardarPregunta(event)">
+                <input type="hidden" id="preguntaId" name="preguntaId">
+
+                <label for="pregunta">Pregunta:</label>
+                <input type="text" id="pregunta" name="pregunta" required>
+
+                <label for="imagen">URL de Imagen:</label>
+                <input type="text" id="imagen" name="imagen" required>
+
+                <label for="opciones">Opciones (separadas por comas):</label>
+                <input type="text" id="opciones" name="opciones" required>
+
+                <label for="respuestaCorrecta">Respuesta Correcta:</label>
+                <input type="text" id="respuestaCorrecta" name="respuestaCorrecta" required>
+
+                <div class="button-group">
+                    <button type="submit" class="button">Guardar</button>
+                    <button type="button" class="button cancel-btn" onclick="cancelarEdicion()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+
+        <table id="tablaPreguntas">
+            <thead>
+                <tr>
+                    <th>Pregunta</th>
+                    <th>Imagen</th>
+                    <th>Opciones</th>
+                    <th>Respuesta Correcta</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Las preguntas se cargarán aquí -->
+            </tbody>
+        </table>
+
+        <div id="notification" class="notification hidden"></div>
+    </div>
+
+    <script src="js/crudUtils.js"></script>
+</body>
+</html>
