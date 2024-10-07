@@ -5,15 +5,14 @@ session_start(); // Iniciar la sesión
 require_once 'config.php';
 
 try {
+    // Configurar MySQLi para que lance excepciones en caso de error
+    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
     // Conectar a la base de datos
     $conexionBD = new mysqli($host, $user, $pass, $db);
-    
-    // Comprobar la conexión
-    if ($conexionBD->connect_error) {
-        die("Error de conexión: " . $conexionBD->connect_error);
-    }
+    $conexionBD->set_charset("utf8"); // Asegurar que los caracteres especiales se manejen correctamente
 
-    // Consulta para obtener todas las preguntas y sus respuestas
+    // Consulta para obtener todas las preguntas
     $consultaPreguntas = "SELECT * FROM preguntes";
     $resultadoPreguntas = $conexionBD->query($consultaPreguntas);
 
@@ -24,7 +23,7 @@ try {
             $idPregunta = $row['id'];
             
             // Obtener las respuestas para cada pregunta
-            $consultaRespostes = "SELECT * FROM respostes WHERE pregunta_id = ?";
+            $consultaRespostes = "SELECT resposta FROM respostes WHERE pregunta_id = ?";
             $stmt = $conexionBD->prepare($consultaRespostes);
             $stmt->bind_param("i", $idPregunta);
             $stmt->execute();
@@ -38,20 +37,28 @@ try {
             // Agregar la pregunta con sus respuestas al array final
             $row['respostes'] = $respostes;
             $totesPreguntes[] = $row;
+
+            // Cerrar el statement para evitar consumo innecesario de recursos
+            $stmt->close();
         }
 
-        // Guardar las preguntas en la sesión
+        // Guardar las preguntas en la sesión si es necesario
         $_SESSION['preguntesSeleccionades'] = $totesPreguntes;
 
         // Devolver todas las preguntas como JSON
         header('Content-Type: application/json');
         echo json_encode($totesPreguntes);
     } else {
+        // Devolver un array vacío si no hay preguntas
         echo json_encode([]);
     }
 } catch (mysqli_sql_exception $e) {
-    echo "Error: " . $e->getMessage();
+    // Capturar cualquier error de SQL
+    http_response_code(500); // Devolver código 500 si hay un error
+    echo json_encode(['error' => $e->getMessage()]);
 } finally {
-    $conexionBD->close();
+    if ($conexionBD) {
+        $conexionBD->close(); // Asegurarse de cerrar la conexión
+    }
 }
 ?>
