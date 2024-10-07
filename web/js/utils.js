@@ -21,7 +21,7 @@ function iniciarJuego(nombre, cantPreg) {
     document.getElementById('pantallaInicio').style.display = 'none';
     document.getElementById('quizContainer').style.display = 'block';
 
-    fetch('../../back/getPreguntas.php')
+    fetch('tr0-2024-2025-un-munt-de-preguntes-Simran0496/back/getPreguntas.php')
         .then(respostes => {
             if (!respostes.ok) {
                 throw new Error('Network response was not ok');
@@ -216,7 +216,7 @@ function enviarResultatsFuncion() {
     };
     
     // Enviar las respuestas a finalitzar.php
-    fetch('../../back/finalitza.php', {
+    fetch('tr0-2024-2025-un-munt-de-preguntes-Simran0496/back/finalitza.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

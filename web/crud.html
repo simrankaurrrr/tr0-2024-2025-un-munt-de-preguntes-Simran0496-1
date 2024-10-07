@@ -12,7 +12,6 @@
 
         <button class="button add-btn" onclick="mostrarFormularioAgregar()">Agregar Nueva Pregunta</button>
 
-        <!-- Formulario para agregar o editar preguntas -->
         <div id="formularioPregunta" class="form-container hidden">
             <h2 id="tituloFormulario">Agregar Pregunta</h2>
             <form id="formPregunta" onsubmit="guardarPregunta(event)">
@@ -47,12 +46,9 @@
                     <th>Acciones</th>
                 </tr>
             </thead>
-            <tbody>
-                <!-- Las preguntas se cargarán aquí -->
-            </tbody>
+
         </table>
 
-        <div id="notification" class="notification hidden"></div>
     </div>
 
     <script src="js/crudUtils.js"></script>
