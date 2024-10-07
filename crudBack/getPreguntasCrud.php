@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-require_once './back/config.php';
+require_once '../back/config.php';
 
 $id = $_GET['id'] ?? null;
 
