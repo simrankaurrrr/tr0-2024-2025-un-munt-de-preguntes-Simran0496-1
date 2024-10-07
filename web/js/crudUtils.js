@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', cargarPreguntas);
 
 function cargarPreguntas() {
-    fetch('../../crudBack/getPreguntasCrud.php')
+    fetch('../.././crudBack/getPreguntasCrud.php')
         .then(response => response.json())
         .then(data => {
             const tabla = document.querySelector('#tablaPreguntas tbody');
