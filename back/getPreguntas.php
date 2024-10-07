@@ -2,8 +2,8 @@
 session_start(); // Iniciar la sesión
 
 // Configuración de la conexión
-require_once 'config.php';
-
+include 'config.php';
+require_once 'migrate.php';
 try {
     // Configurar MySQLi para que lance excepciones en caso de error
     mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
