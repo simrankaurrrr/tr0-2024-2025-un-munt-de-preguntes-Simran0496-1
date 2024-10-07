@@ -21,7 +21,7 @@ El projecte s'ha de poder desplegar en mode desenvolupament simplement fent dock
 
 http://a23gurkaukau.daw.inspedralbes.cat/tr0-2024-2025-un-munt-de-preguntes-Simran0496/web/
 
-
+http://a23gurkaukau.daw.inspedralbes.cat/tr0-2024-2025-un-munt-de-preguntes-Simran0496/web/crud.html
 
 
 

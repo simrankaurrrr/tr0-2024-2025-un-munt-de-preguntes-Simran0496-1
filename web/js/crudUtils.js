@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', cargarPreguntas);
 
 function cargarPreguntas() {
-    fetch('.././crudBack/getPreguntasCrud.php')
+    fetch('../../crudBack/getPreguntasCrud.php')
         .then(response => response.json())
         .then(data => {
             const tabla = document.querySelector('#tablaPreguntas tbody');
@@ -37,7 +37,7 @@ function guardarPregunta(event) {
     const formData = new FormData(event.target);
     const id = formData.get('preguntaId');
 
-    const url = id ? '.././crudBack/updatePregunta.php' : '.././crudBack/addPregunta.php';
+    const url = id ? '../../crudBack/updatePregunta.php' : '../../crudBack/addPregunta.php';
     fetch(url, {
         method: 'POST',
         body: formData
@@ -55,7 +55,7 @@ function guardarPregunta(event) {
 }
 
 function editarPregunta(id) {
-    fetch(`.././crudBack/getPreguntasCrud.php?id=${id}`)
+    fetch(`../../crudBack/getPreguntasCrud.php?id=${id}`)
     .then(response => {
         if (!response.ok) { // Verifica si la respuesta no es 2xx
             throw new Error('Error en la red');
@@ -87,7 +87,7 @@ function cancelarEdicion() {
 
 function borrarPregunta(id) {
     if (confirm('¿Estás seguro de que deseas eliminar esta pregunta?')) {
-        fetch(`.././crudBack/deletePregunta.php?id=${id}`)
+        fetch(`../../crudBack/deletePregunta.php?id=${id}`)
             .then(response => response.json())
             .then(() => {
                 cargarPreguntas();
