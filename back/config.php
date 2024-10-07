@@ -1,8 +1,16 @@
 <?php
+
+$host = 'localhost';
+$db = 'a23gurkaukau_db';
+$user = 'a23gurkaukau_simran'; 
+$pass = 'Simran1234'; 
+
+/*
 $host = 'localhost';
 $db = 'db';
-$user = 'root'; // Cambia esto si es necesario
-$pass = ''; // Cambia esto si es necesario
+$user = 'root'; 
+$pass = ''; 
+*/
 
 // Crear conexión
 $conn = new mysqli($host, $user, $pass, $db);
